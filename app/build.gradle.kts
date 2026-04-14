@@ -60,7 +60,7 @@ android {
 }
 
 base {
-    archivesName.set("NavigationSuiteScaffold-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
+    archivesName.set("ListItem-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
 }
 
 dependencies {
@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material.icons.core)
+    implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.core.splashscreen)
