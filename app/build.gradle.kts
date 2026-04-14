@@ -1,0 +1,83 @@
+import java.nio.charset.StandardCharsets
+
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.compose)
+}
+
+private val gitCommitsCount: Int by lazy {
+    try {
+        val isWindows = System.getProperty("os.name").contains("Windows", ignoreCase = true)
+        val processBuilder = when {
+            isWindows -> ProcessBuilder("cmd", "/c", "git", "rev-list", "--count", "HEAD")
+            else -> ProcessBuilder("git", "rev-list", "--count", "HEAD")
+        }
+        processBuilder.redirectErrorStream(true)
+        processBuilder.start().inputStream.bufferedReader(StandardCharsets.UTF_8).readLine().trim().toInt()
+    } catch (_: Exception) {
+        1
+    }
+}
+
+kotlin {
+    jvmToolchain(libs.versions.jdk.get().toInt())
+}
+
+android {
+    namespace = "org.michaelbel.listitem"
+    compileSdk = libs.versions.compile.sdk.get().toInt()
+
+    defaultConfig {
+        applicationId = "org.michaelbel.listitem"
+        minSdk = libs.versions.min.sdk.get().toInt()
+        targetSdk = libs.versions.target.sdk.get().toInt()
+        versionCode = gitCommitsCount
+        versionName = "1.0.0"
+    }
+
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "template"
+            keyPassword = "password"
+            storeFile = rootProject.file(".github/debug-key.jks")
+            storePassword = "password"
+        }
+    }
+
+    buildTypes {
+        debug {
+            isDebuggable = true
+            isMinifyEnabled = false
+            isShrinkResources = false
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
+
+    buildFeatures {
+        compose = true
+    }
+}
+
+base {
+    archivesName.set("NavigationSuiteScaffold-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
+}
+
+dependencies {
+    implementation(libs.google.material)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material.icons.core)
+    implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.navigation3.runtime)
+    implementation(libs.androidx.navigation3.ui)
+}
+
+tasks.register("printVersion") {
+    doLast {
+        println("VERSION_NAME=${android.defaultConfig.versionName}")
+        println("VERSION_CODE=${android.defaultConfig.versionCode}")
+    }
+}

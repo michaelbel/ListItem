@@ -1,0 +1,192 @@
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
+
+package org.michaelbel.listitem.sample08_NavigationSuiteScaffold_PrimaryActionContent.main.settings
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.michaelbel.listitem.AppSettings
+import org.michaelbel.listitem.FormatAlignCenter
+import org.michaelbel.listitem.FormatAlignLeft
+import org.michaelbel.listitem.FormatAlignRight
+import org.michaelbel.listitem.FormatPaint
+import org.michaelbel.listitem.bottomListItemShape
+import org.michaelbel.listitem.middleExtraSmallListItemShape
+import org.michaelbel.listitem.middleLargeIncreasedListItemShape
+import org.michaelbel.listitem.topListItemShape
+
+@Composable
+fun SettingsScreen(
+    isNavigationRail: Boolean,
+    isNavigationBar: Boolean
+) {
+    val dynamicColorsEnabled by AppSettings.dynamicColorsFlow.collectAsStateWithLifecycle()
+    val primaryActionAlignment by AppSettings.primaryActionAlignmentFlow.collectAsStateWithLifecycle()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val navBarBottom = if (isNavigationRail) WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding() else 0.dp
+
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "Settings") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
+                ),
+                scrollBehavior = scrollBehavior
+            )
+        },
+        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Horizontal)
+    ) { innerPadding ->
+        LazyColumn(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
+            contentPadding = PaddingValues(
+                start = 16.dp,
+                top = 16.dp,
+                end = 16.dp,
+                bottom = if (isNavigationRail) navBarBottom else 16.dp
+            ),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            item {
+                ListItem(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(middleLargeIncreasedListItemShape)
+                        .clickable(onClick = AppSettings::toggleDynamicColors),
+                    colors = ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
+                    ),
+                    headlineContent = { Text(text = "Dynamic Colors") },
+                    leadingContent = {
+                        Icon(
+                            imageVector = FormatPaint,
+                            contentDescription = null
+                        )
+                    },
+                    trailingContent = {
+                        Switch(
+                            checked = dynamicColorsEnabled,
+                            onCheckedChange = null
+                        )
+                    }
+                )
+            }
+            if (isNavigationBar) {
+                item {
+                    Spacer(
+                        modifier = Modifier.height(14.dp)
+                    )
+                }
+                item {
+                    ListItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(topListItemShape)
+                            .clickable { AppSettings.setPrimaryActionAlignment(Alignment.Start) },
+                        colors = ListItemDefaults.colors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
+                        ),
+                        headlineContent = { Text(text = "Alignment.Start") },
+                        leadingContent = {
+                            Icon(
+                                imageVector = FormatAlignLeft,
+                                contentDescription = null
+                            )
+                        },
+                        trailingContent = {
+                            RadioButton(
+                                selected = primaryActionAlignment == Alignment.Start,
+                                onClick = null
+                            )
+                        }
+                    )
+                }
+                item {
+                    ListItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(middleExtraSmallListItemShape)
+                            .clickable { AppSettings.setPrimaryActionAlignment(Alignment.CenterHorizontally) },
+                        colors = ListItemDefaults.colors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
+                        ),
+                        headlineContent = { Text(text = "Alignment.Center") },
+                        leadingContent = {
+                            Icon(
+                                imageVector = FormatAlignCenter,
+                                contentDescription = null
+                            )
+                        },
+                        trailingContent = {
+                            RadioButton(
+                                selected = primaryActionAlignment == Alignment.CenterHorizontally,
+                                onClick = null
+                            )
+                        }
+                    )
+                }
+                item {
+                    ListItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(bottomListItemShape)
+                            .clickable { AppSettings.setPrimaryActionAlignment(Alignment.End) },
+                        colors = ListItemDefaults.colors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
+                        ),
+                        headlineContent = { Text(text = "Alignment.End") },
+                        leadingContent = {
+                            Icon(
+                                imageVector = FormatAlignRight,
+                                contentDescription = null
+                            )
+                        },
+                        trailingContent = {
+                            RadioButton(
+                                selected = primaryActionAlignment == Alignment.End,
+                                onClick = null
+                            )
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
