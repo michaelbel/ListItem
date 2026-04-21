@@ -1,12 +1,10 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
 package org.michaelbel.listitem.sample01_ListItem
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -17,6 +15,7 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -44,9 +43,7 @@ fun Sample01App() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text("ListItem") },
@@ -58,38 +55,39 @@ fun Sample01App() {
         }
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                top = innerPadding.calculateTopPadding(),
-                bottom = innerPadding.calculateBottomPadding()
-            ),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+            contentPadding = innerPadding,
+            verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
             item { SectionLabel("headlineContent") }
             item {
                 ListItem(
-                    headlineContent = { Text("Главный текст") },
+                    headlineContent = {
+                        Text(text = "Headline Text")
+                    },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
-            item { SectionLabel("headlineContent + supportingContent") }
+            item { SectionLabel("overlineContent") }
             item {
                 ListItem(
-                    headlineContent = { Text("Главный текст") },
-                    supportingContent = { Text("Вспомогательный текст") },
+                    headlineContent = { Text("Headline Text") },
+                    overlineContent = {
+                        Text(text = "OVERLINE TEXT")
+                    },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
-            item { SectionLabel("headlineContent + overlineContent + supportingContent") }
+            item { SectionLabel("supportingContent") }
             item {
                 ListItem(
-                    headlineContent = { Text("Главный текст") },
-                    overlineContent = { Text("КАТЕГОРИЯ") },
-                    supportingContent = { Text("Вспомогательный текст") },
+                    headlineContent = { Text("Headline Text") },
+                    supportingContent = {
+                        Text(text = "Supporting Text")
+                    },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -103,7 +101,8 @@ fun Sample01App() {
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Email,
-                            contentDescription = null)
+                            contentDescription = null
+                        )
                     },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -162,7 +161,6 @@ fun Sample01App() {
             item {
                 ListItem(
                     headlineContent = { Text("Иконка-стрелка") },
-                    supportingContent = { Text("Переход на следующий экран") },
                     trailingContent = {
                         Icon(
                             imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
@@ -296,14 +294,14 @@ fun Sample01App() {
             item { SectionLabel("tonalElevation") }
             item {
                 ListItem(
-                    headlineContent = { Text("16.dp") },
+                    headlineContent = { Text("tonalElevation = 16.dp") },
                     tonalElevation = 16.dp
                 )
             }
             item { SectionLabel("shadowElevation") }
             item {
                 ListItem(
-                    headlineContent = { Text("16.dp") },
+                    headlineContent = { Text("shadowElevation = 16.dp") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     ),

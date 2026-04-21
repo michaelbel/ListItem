@@ -4,13 +4,13 @@ package org.michaelbel.listitem.sample05_SegmentedListItem
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Reply
 import androidx.compose.material.icons.outlined.Archive
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Reply
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -32,9 +32,7 @@ fun Sample05App() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text("SegmentedListItem") },
@@ -46,14 +44,8 @@ fun Sample05App() {
         }
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                top = innerPadding.calculateTopPadding(),
-                end = 16.dp,
-                bottom = innerPadding.calculateBottomPadding()
-            ),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+            contentPadding = innerPadding + PaddingValues(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
             item { SectionLabel("Действия с письмом") }
             item {
@@ -61,7 +53,7 @@ fun Sample05App() {
                     onClick = {},
                     leadingContent = {
                         Icon(
-                            imageVector = Icons.Outlined.Reply,
+                            imageVector = Icons.AutoMirrored.Outlined.Reply,
                             contentDescription = null
                         )
                     },

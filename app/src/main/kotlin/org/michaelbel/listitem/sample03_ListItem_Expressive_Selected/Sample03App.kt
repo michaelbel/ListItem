@@ -4,7 +4,7 @@ package org.michaelbel.listitem.sample03_ListItem_Expressive_Selected
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DarkMode
@@ -37,9 +37,7 @@ fun Sample03App() {
     var selectedTheme by rememberSaveable { mutableIntStateOf(0) }
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text("ListItem Expressive Selected") },
@@ -51,14 +49,8 @@ fun Sample03App() {
         }
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                top = innerPadding.calculateTopPadding(),
-                end = 16.dp,
-                bottom = innerPadding.calculateBottomPadding()
-            ),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+            contentPadding = innerPadding + PaddingValues(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
             item { SectionLabel("Тема") }
             item {

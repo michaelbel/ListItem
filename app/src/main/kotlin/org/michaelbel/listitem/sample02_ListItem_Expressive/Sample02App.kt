@@ -9,7 +9,7 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -51,9 +51,7 @@ fun Sample02App() {
     val context = LocalContext.current
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text(text = "ListItem Expressive") },
@@ -65,14 +63,8 @@ fun Sample02App() {
         }
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                top = innerPadding.calculateTopPadding(),
-                end = 16.dp,
-                bottom = innerPadding.calculateBottomPadding()
-            ),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+            contentPadding = innerPadding + PaddingValues(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
             item { SectionLabel("onClick") }
             item {
@@ -80,8 +72,9 @@ fun Sample02App() {
                     onClick = { Toast.makeText(context, "onClick", Toast.LENGTH_SHORT).show() },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text(text = "Кликабельный элемент") }
+                    ),
+                    content = { Text(text = "Clickable element") }
+                )
             }
             item { SectionLabel("enabled") }
             item {
@@ -251,27 +244,27 @@ fun Sample02App() {
                     onClick = {},
                     overlineContent = {
                         Text(
-                            text = "КАТЕГОРИЯ"
+                            text = "OVERLINE TEXT"
                         )
                     },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text(text = "overline") }
+                ) { Text(text = "Content") }
             }
             item {
                 ListItem(
                     onClick = {},
                     overlineContent = {
                         Text(
-                            text = "КАТЕГОРИЯ"
+                            text = "OVERLINE TEXT"
                         )
                     },
-                    supportingContent = { Text(text = "Вспомогательный текст") },
+                    supportingContent = { Text(text = "Supporting Text") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text(text = "overline + supporting") }
+                ) { Text(text = "Content") }
             }
             item { SectionLabel(text = "supportingContent") }
             item {
@@ -279,26 +272,26 @@ fun Sample02App() {
                     onClick = {},
                     supportingContent = {
                         Text(
-                            text = "Одна строка текста"
+                            text = "Supporting Text"
                         )
                     },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text(text = "Однострочный") }
+                ) { Text(text = "Content") }
             }
             item {
                 ListItem(
                     onClick = {},
                     supportingContent = {
                         Text(
-                            text = "Длинный вспомогательный текст на несколько строк, который переносится на следующую строку"
+                            text = "Supporting Text very long long long long long long long long long long long long long long long long long long"
                         )
                     },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text(text = "Многострочный") }
+                ) { Text(text = "Content multiline") }
             }
             item { SectionLabel(text = "verticalAlignment") }
             item {
@@ -344,13 +337,13 @@ fun Sample02App() {
             item { SectionLabel(text = "onLongClick") }
             item {
                 ListItem(
-                    onClick = { Toast.makeText(context, "onClick", Toast.LENGTH_SHORT).show() },
+                    onClick = {},
                     onLongClick = { Toast.makeText(context, "onLongClick", Toast.LENGTH_SHORT).show() },
-                    onLongClickLabel = "Долгое нажатие",
+                    onLongClickLabel = "Long click",
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text(text = "Кликабельный элемент") }
+                ) { Text(text = "Long-clickable element") }
             }
             item { SectionLabel(text = "shapes") }
             item {
@@ -455,7 +448,7 @@ fun Sample02App() {
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text(text = "Elevation — 16.dp") }
+                ) { Text(text = "elevation = 16.dp") }
             }
             item { SectionLabel(text = "contentPadding") }
             item {

@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.only
@@ -45,6 +44,7 @@ import org.michaelbel.listitem.sample04_ListItem_Expressive_Checked.Sample04App
 import org.michaelbel.listitem.sample05_SegmentedListItem.Sample05App
 import org.michaelbel.listitem.sample06_SegmentedListItem_Selected.Sample06App
 import org.michaelbel.listitem.sample07_SegmentedListItem_Checked.Sample07App
+import org.michaelbel.listitem.sample08_SegmentedGap.Sample08App
 
 class MainActivity: ComponentActivity() {
 
@@ -67,6 +67,7 @@ class MainActivity: ComponentActivity() {
                             4 -> Sample05App()
                             5 -> Sample06App()
                             6 -> Sample07App()
+                            7 -> Sample08App()
                         }
                     }
                 }
@@ -80,9 +81,7 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text(text = "ListItem Samples") },
@@ -95,16 +94,14 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Horizontal)
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize(),
+            modifier = Modifier.padding(innerPadding),
             contentPadding = PaddingValues(
                 start = 16.dp,
                 top = 16.dp,
                 end = 16.dp,
                 bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
             ),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+            verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
             item {
                 SegmentedListItem(
@@ -185,6 +182,21 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 ) { Text(text = "SegmentedListItem Checked") }
+            }
+            item {
+                Spacer(
+                    modifier = Modifier.height(12.dp)
+                )
+            }
+            item {
+                SegmentedListItem(
+                    onClick = { onSampleClick(7) },
+                    overlineContent = { Text(text = "Sample 08") },
+                    shapes = ListItemDefaults.segmentedShapes(index = 0, count = 1),
+                    colors = ListItemDefaults.segmentedColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
+                    )
+                ) { Text(text = "SegmentedGap") }
             }
         }
     }
