@@ -46,7 +46,7 @@ import kotlin.math.roundToInt
 fun Sample08App() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-    val gapSteps: List<Dp> = listOf(2.dp, 4.dp, 6.dp, 8.dp, 10.dp, 12.dp, 14.dp, 16.dp)
+    val gapSteps: List<Dp> = listOf(ListItemDefaults.SegmentedGap, 4.dp, 6.dp, 8.dp, 10.dp, 12.dp, 14.dp, 16.dp)
     var sliderValue by remember { mutableFloatStateOf(0f) }
     val gapIndex = sliderValue.roundToInt().coerceIn(gapSteps.indices)
     val animatedGap by animateDpAsState(
