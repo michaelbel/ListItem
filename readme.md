@@ -5,14 +5,12 @@
 
 A collection of Android samples demonstrating `ListItem`, `ListItem Expressive`, and `SegmentedListItem` components from Jetpack Compose Material 3.
 
-<table>
-  <tr>
-    <td><img src=".github/pics/gif1.gif"/></td>
-    <td><img src=".github/pics/gif2.gif"/></td>
-    <td><img src=".github/pics/gif3.gif"/></td>
-    <td><img src=".github/pics/gif4.gif"/></td>
-  </tr>
-</table>
+<div>
+  <img src=".github/pics/gif1.gif" alt="" width="23%"/>
+  <img src=".github/pics/gif2.gif" alt="" width="23%"/>
+  <img src=".github/pics/gif3.gif" alt="" width="23%"/>
+  <img src=".github/pics/gif4.gif" alt="" width="23%"/>
+</div>
 
 ## Samples
 
