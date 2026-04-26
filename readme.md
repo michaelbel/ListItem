@@ -1,26 +1,28 @@
-# NavigationSuiteScaffold
+# ListItem
 
-[![workflow-status](https://img.shields.io/github/actions/workflow/status/michaelbel/NavigationSuiteScaffold/ci.yml?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/NavigationSuiteScaffold/actions)
-[![last-commit](https://img.shields.io/github/last-commit/michaelbel/NavigationSuiteScaffold?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/NavigationSuiteScaffold/commits)
+[![workflow-status](https://img.shields.io/github/actions/workflow/status/michaelbel/ListItem/ci.yml?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/ListItem/actions)
+[![last-commit](https://img.shields.io/github/last-commit/michaelbel/ListItem?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/ListItem/commits)
 
-A collection of Android samples demonstrating how to implement adaptive navigation using `NavigationSuiteScaffold` from Jetpack Compose Material 3.
+A collection of Android samples demonstrating `ListItem`, `ListItem Expressive`, and `SegmentedListItem` components from Jetpack Compose Material 3.
 
-<div align="left">
-    <img src=".github/pic.webp" alt="Picture">
-</div>
+<table>
+  <tr>
+    <td><img src=".github/pics/gif1.gif"/></td>
+    <td><img src=".github/pics/gif2.gif"/></td>
+    <td><img src=".github/pics/gif3.gif"/></td>
+    <td><img src=".github/pics/gif4.gif"/></td>
+  </tr>
+</table>
 
 ## Samples
 
-| #  | Sample                                 | Description                                                        |
-|----|----------------------------------------|--------------------------------------------------------------------|
-| 01 | Classic Scaffold BottomBar             | Traditional bottom navigation using `Scaffold` with `BottomAppBar` |
-| 02 | NavigationSuiteScaffold NavigationBar  | Bottom navigation bar via `NavigationSuiteScaffold`                |
-| 03 | NavigationSuiteScaffold NavigationRail | Side navigation rail for larger screens                            |
-| 04 | NavigationRail NoLabels                | Navigation rail without text labels                                |
-| 05 | NavigationRail Expanded                | Expanded navigation rail layout                                    |
-| 06 | NavigationRail VerticalArrangement     | Navigation rail with custom vertical arrangement                   |
-| 07 | NavigationRail Expanded State          | Expanded rail with persistent state                                |
-| 08 | PrimaryActionContent                   | Navigation rail with a primary action (FAB-like) slot              |
-| 09 | Colors                                 | Custom color theming for navigation components                     |
-| 10 | NavigationSuite                        | Low-level `NavigationSuite` composable usage                       |
-| 11 | NavigationSuiteScaffoldLayout          | Manual layout control with `NavigationSuiteScaffoldLayout`         |
+| # | Sample                                                                                                                           | Description                                                                              |
+|---|----------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| 1 | [ListItem](app/src/main/kotlin/org/michaelbel/listitem/sample01_ListItem/Sample01App.kt)                                         | Basic `ListItem` usage with headline, overline, supporting, leading and trailing content |
+| 2 | [ListItem Expressive](app/src/main/kotlin/org/michaelbel/listitem/sample02_ListItem_Expressive/Sample02App.kt)                   | Expressive variant of `ListItem` from Material 3 Expressive                              |
+| 3 | [ListItem Expressive Selected](app/src/main/kotlin/org/michaelbel/listitem/sample03_ListItem_Expressive_Selected/Sample03App.kt) | Expressive `ListItem` with selected state                                                |
+| 4 | [ListItem Expressive Checked](app/src/main/kotlin/org/michaelbel/listitem/sample04_ListItem_Expressive_Checked/Sample04App.kt)   | Expressive `ListItem` with checked state                                                 |
+| 5 | [SegmentedListItem](app/src/main/kotlin/org/michaelbel/listitem/sample05_SegmentedListItem/Sample05App.kt)                       | Basic `SegmentedListItem` usage                                                          |
+| 6 | [SegmentedListItem Selected](app/src/main/kotlin/org/michaelbel/listitem/sample06_SegmentedListItem_Selected/Sample06App.kt)     | `SegmentedListItem` with selected state                                                  |
+| 7 | [SegmentedListItem Checked](app/src/main/kotlin/org/michaelbel/listitem/sample07_SegmentedListItem_Checked/Sample07App.kt)       | `SegmentedListItem` with checked state                                                   |
+| 8 | [SegmentedGap](app/src/main/kotlin/org/michaelbel/listitem/sample08_SegmentedGap/Sample08App.kt)                                 | `SegmentedGap` — spacing between segmented list items                                    |
