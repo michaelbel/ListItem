@@ -1,9 +1,5 @@
-# Folders
 .kotlin/
 .gradle/
 .claude/
 build/
-
-# Files
-/.github/keystore.properties
 local.properties
