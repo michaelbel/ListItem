@@ -1,9 +1,9 @@
+# Folders
+.kotlin/
+.gradle/
+.claude/
+build/
+
+# Files
 /.github/keystore.properties
-.kotlin
-.gradle
-.idea
-.claude
-build
-build-cache
-generated
 local.properties
