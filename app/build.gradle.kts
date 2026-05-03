@@ -68,11 +68,12 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.core)
     implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.core.splashscreen)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
 
 tasks.register("printVersion") {
+    description = "Prints the current versionName and versionCode to stdout."
     doLast {
         println("VERSION_NAME=${android.defaultConfig.versionName}")
         println("VERSION_CODE=${android.defaultConfig.versionCode}")
