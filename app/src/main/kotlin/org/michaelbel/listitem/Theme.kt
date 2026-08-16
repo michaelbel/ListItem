@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialExpressiveTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MotionScheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -112,7 +111,6 @@ fun AppTheme(
 ) {
     MaterialExpressiveTheme(
         colorScheme = if (isSystemInDarkTheme()) BlueDarkColorScheme else BlueLightColorScheme,
-        motionScheme = MotionScheme.expressive(),
         content = content
     )
 }
