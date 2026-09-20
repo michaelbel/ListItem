@@ -22,14 +22,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.rememberSliderState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -43,8 +42,12 @@ fun Sample08App() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     val gapSteps: List<Dp> = listOf(ListItemDefaults.SegmentedGap, 4.dp, 6.dp, 8.dp, 10.dp, 12.dp, 14.dp, 16.dp)
-    var sliderValue by remember { mutableFloatStateOf(0f) }
-    val gapIndex = sliderValue.roundToInt().coerceIn(gapSteps.indices)
+    val sliderState = rememberSliderState(
+        value = 0F,
+        steps = 6,
+        trackRange = 0F..7F
+    )
+    val gapIndex = sliderState.value.roundToInt().coerceIn(gapSteps.indices)
     val animatedGap by animateDpAsState(
         targetValue = gapSteps[gapIndex],
         animationSpec = spring(),
@@ -66,10 +69,8 @@ fun Sample08App() {
             val interactionSource = remember { MutableInteractionSource() }
 
             Slider(
-                value = sliderValue,
-                onValueChange = { sliderValue = it },
-                valueRange = 0F..7F,
-                steps = 6,
+                state = sliderState,
+                modifier = Modifier.padding(horizontal = 32.dp),
                 interactionSource = interactionSource,
                 thumb = { state ->
                     val index = state.value.roundToInt().coerceIn(gapSteps.indices)
@@ -87,8 +88,7 @@ fun Sample08App() {
                             interactionSource = interactionSource
                         )
                     }
-                },
-                modifier = Modifier.padding(horizontal = 32.dp)
+                }
             )
         },
         floatingActionButtonPosition = FabPosition.Center
