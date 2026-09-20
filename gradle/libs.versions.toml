@@ -12,7 +12,7 @@ androidx-compose-ui = "1.12.1"
 androidx-compose-material-icons = "1.7.8"
 androidx-compose-material3 = "1.5.0-alpha28"
 androidx-core-splashscreen = "1.2.0"
-androidx-navigation3 = "1.1.6"
+androidx-navigation3 = "1.1.7"
 
 [libraries]
 google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
